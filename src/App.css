@@ -1,0 +1,34 @@
+.createTask {
+    border-radius: 100%;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-weight: bolder;
+    color: white;
+    background-color: #2f82ff;
+    font-size: 2rem;
+    display: grid;
+    border: none;
+    cursor: pointer;
+}
+
+.title {
+ margin-bottom: 10px;
+}
+
+.box {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 13px;
+}
+
+.task{
+    display: flex;
+    border:1px solid black;
+    padding: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 7px;
+}
