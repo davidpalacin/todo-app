@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import './App.css'
-import { taskArr } from './services/getTasks'
 import { useNavigate } from 'react-router'
+import { data } from './utils/data'
 
 function App() {
-  const [tasks, setTasks] = useState(taskArr)
+  const [tasks, setTasks] = useState(data)
   const navigate = useNavigate()
   const openCreateTask = () => {
     navigate('/create-task')
@@ -19,9 +19,11 @@ function App() {
 
       <div className="box">
         {
-          tasks.map((task) => (
-            <div className='task' key={task.id}>{task.title}</div>
-          ))
+          tasks.length >= 1
+            ? tasks.map((task) => (
+              <div className='task' key={task.id}>{task.title}</div>
+            ))
+            : 'The task list is empty...'
         }
       </div>
     </div>

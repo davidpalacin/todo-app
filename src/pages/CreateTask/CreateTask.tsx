@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import './createTask.css'
-import { taskArr } from '../../services/getTasks'
+import { data } from '../../utils/data'
+import { useNavigate } from 'react-router'
 
 export default function CreateTask() {
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
-    const [tasks, setTasks] = useState(taskArr)
+    const [tasks, setTasks] = useState(data)
+    const navigate = useNavigate()
 
 
     const handleTitle = (event: any) => {
@@ -20,7 +22,8 @@ export default function CreateTask() {
         const newId = tasks.length + 1
         tasks.push({ id: newId, title, content })
         setTasks(tasks)
-        console.log(tasks)
+        console.log('Task created successfully')
+        navigate('/')
     }
 
     return (
