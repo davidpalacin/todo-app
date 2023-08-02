@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router'
 import { data } from './utils/data'
 
 function App() {
-  const [tasks, setTasks] = useState(data)
+  const [tasks] = useState(data)
   const navigate = useNavigate()
   const openCreateTask = () => {
-    navigate('/create-task')
+    navigate('/create')
   }
+
   return (
     <div className="main">
       <h3 className='title'>The ultimate TODO App</h3>
@@ -21,7 +22,7 @@ function App() {
         {
           tasks.length >= 1
             ? tasks.map((task) => (
-              <div className='task' key={task.id}>{task.title}</div>
+              <div onClick={() => navigate(`task/${task.id}`)} className='task' key={task.id}>{task.title}</div>
             ))
             : 'The task list is empty...'
         }

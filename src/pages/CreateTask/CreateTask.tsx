@@ -18,6 +18,11 @@ export default function CreateTask() {
         setContent(event.target.value)
     }
 
+    const handleCheckEmptyTask = () => {
+        if (title.trim() === "" || content.trim() === "") return
+        handleCreateTask()
+    }
+
     const handleCreateTask = () => {
         const newId = tasks.length + 1
         tasks.push({ id: newId, title, content })
@@ -38,7 +43,7 @@ export default function CreateTask() {
                 <textarea onChange={handleContent} />
             </div>
 
-            <button onClick={handleCreateTask} className="confirm">
+            <button onClick={handleCheckEmptyTask} className="confirm">
                 Create
             </button>
         </div>
