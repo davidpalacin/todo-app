@@ -31,7 +31,7 @@ export default function CreateTask() {
                 return maxId;
             }
         }, 0) + 1;
-        tasks.push({ id: newId, title, content, state: 'pending' })
+        tasks.push({ id: newId, title, content, status: 'pending' })
         setTasks(tasks)
         console.log('Task created successfully')
         navigate('/')

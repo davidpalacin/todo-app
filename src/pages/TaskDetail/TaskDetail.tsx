@@ -11,6 +11,8 @@ export default function TaskDetail() {
     const thisTask = tasks.find(task => task.id.toString() === id)
     const [editTitle, setEditTitle] = useState(thisTask?.title)
     const [editContent, setEditContent] = useState(thisTask?.content)
+    const [btnText, setBtnText] = useState('')
+    const [status, setStatus] = useState(thisTask?.status)
 
 
     useEffect(() => {
@@ -19,6 +21,12 @@ export default function TaskDetail() {
             navigate('/');
         }
     }, [thisTask, navigate]);
+
+    useEffect(() => {
+        if (status === 'pending') { setBtnText('Mark as in progress') }
+        if (status === 'in progress') { setBtnText('Mark as completed') }
+        if (status === 'completed') { setBtnText('Mark as pending') }
+    }, [status])
 
     if (!thisTask) return null
 
@@ -36,8 +44,22 @@ export default function TaskDetail() {
     const handleSaveChanges = () => {
         if (editContent) thisTask.content = editContent
         if (editTitle) thisTask.title = editTitle
-        console.log(thisTask)
         setEditMode(false)
+    }
+
+    const handleChangeStatus = () => {
+        if (status === 'pending') {
+            setStatus('in progress');
+            thisTask.status = 'in progress'
+        }
+        if (status === 'in progress') {
+            setStatus('completed');
+            thisTask.status = 'completed'
+        }
+        if (status === 'completed') {
+            setStatus('pending');
+            thisTask.status = 'pending'
+        }
     }
 
     return (
@@ -72,6 +94,9 @@ export default function TaskDetail() {
                                     Delete
                                 </button>
                                 <button onClick={handleEditMode} className="editTask">Edit</button>
+                                <button onClick={handleChangeStatus} className="markAsCompleted">
+                                    {btnText}
+                                </button>
                             </div>
                         </>
                     )}
