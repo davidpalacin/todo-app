@@ -24,8 +24,14 @@ export default function CreateTask() {
     }
 
     const handleCreateTask = () => {
-        const newId = tasks.length + 1
-        tasks.push({ id: newId, title, content })
+        const newId: number = tasks.reduce((maxId, task) => {
+            if (task.id > maxId) {
+                return task.id;
+            } else {
+                return maxId;
+            }
+        }, 0) + 1;
+        tasks.push({ id: newId, title, content, state: 'pending' })
         setTasks(tasks)
         console.log('Task created successfully')
         navigate('/')
