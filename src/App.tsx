@@ -9,6 +9,9 @@ function App() {
   const openCreateTask = () => {
     navigate('/create')
   }
+  const handleOptions = () => {
+    console.log('click options')
+  }
 
   return (
     <div className="main">
@@ -22,7 +25,12 @@ function App() {
         {
           tasks.length >= 1
             ? tasks.map((task) => (
-              <div onClick={() => navigate(`task/${task.id}`)} className='task' key={task.id}>{task.title}</div>
+              <section key={task.id} className="task-box">
+                <div onClick={() => navigate(`task/${task.id}`)} className='task'>
+                  {task.title}
+                </div>
+                  <button onClick={handleOptions} className='btnOptions'>⚫ ⚫ ⚫</button>
+              </section>
             ))
             : 'The task list is empty...'
         }

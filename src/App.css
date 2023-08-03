@@ -15,7 +15,7 @@
 }
 
 .title {
- margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .box {
@@ -24,11 +24,25 @@
     gap: 13px;
 }
 
-.task{
-    display: flex;
-    border:1px solid black;
+.task {
     padding: 8px;
     font-weight: bold;
     cursor: pointer;
     border-radius: 7px;
+}
+
+.btnOptions {
+    margin-left: auto;
+    border: none;
+    background-color: transparent;
+    display: grid;
+    place-items: center;
+    padding: 0 10px;
+    font-size: 5px;
+}
+
+.task-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid black;
 }
