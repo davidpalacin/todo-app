@@ -36,6 +36,7 @@ export default function TaskCard({ task }: { task: Task }) {
     }, [status])
 
     const deleteTask = () => {
+        console.log(tasks)
         const index = tasks.indexOf(task)
         tasks.splice(index, 1)
         setTasks(tasks)
