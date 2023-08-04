@@ -3,6 +3,7 @@
     flex-direction: column;
     justify-content: center;
     gap: 13px;
+    padding: 5px;
 }
 .taskForm input {
     width: 100%;

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { useNavigate } from 'react-router'
 import { data } from './utils/data'
+import TaskCard from './components/TaskCard/TaskCard'
 
 function App() {
   const [tasks] = useState(data)
@@ -9,9 +10,7 @@ function App() {
   const openCreateTask = () => {
     navigate('/create')
   }
-  const handleOptions = () => {
-    console.log('click options')
-  }
+
 
   return (
     <div className="main">
@@ -21,16 +20,11 @@ function App() {
         +
       </button>
 
-      <div className="box">
+      <div className="main">
         {
           tasks.length >= 1
             ? tasks.map((task) => (
-              <section key={task.id} className="task-box">
-                <div onClick={() => navigate(`task/${task.id}`)} className='task'>
-                  {task.title}
-                </div>
-                  <button onClick={handleOptions} className='btnOptions'>⚫ ⚫ ⚫</button>
-              </section>
+              <TaskCard key={task.id} task={task} />
             ))
             : 'The task list is empty...'
         }

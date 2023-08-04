@@ -1,0 +1,20 @@
+.menuOptions {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuOptions button {
+    border: none;
+    color: white;
+    padding: 10px 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.menuOptionsDelete {
+    background-color: rgb(255, 65, 65);
+}
+
+.menuOptionsChangeStatus {
+    background-color: rgb(65, 109, 255);
+}

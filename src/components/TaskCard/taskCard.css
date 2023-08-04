@@ -1,0 +1,12 @@
+.task {
+    padding: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 7px;
+}
+
+.task-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid black;
+}
