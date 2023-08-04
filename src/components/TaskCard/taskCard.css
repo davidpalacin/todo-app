@@ -7,6 +7,51 @@
 
 .task-box {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     border: 1px solid black;
+}
+
+.taskStatus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menuOptions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 3px;
+    gap: 3px;
+}
+
+.menuOptions button {
+    padding: 10px 0;
+    font-weight: bold;
+    cursor: pointer;
+    background-color: white;
+}
+
+.menuOptionsDelete {
+    color: rgb(255, 65, 65);
+    border: 3px solid rgb(255, 65, 65);
+}
+
+.menuOptionsChangeStatus {
+    border: 3px solid rgb(0, 196, 98);
+    color: rgb(0, 196, 98);
+}
+
+.pendingText {
+    color: red;
+    font-weight: 600;
+}
+
+.completedText {
+    color: green;
+    font-weight: 600;
+}
+
+.inProgressText {
+    color: rgb(228, 148, 0);
+    font-weight: 600;
 }

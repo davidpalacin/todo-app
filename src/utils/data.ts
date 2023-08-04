@@ -1,26 +1,26 @@
 export const data = [
     {
         id: 1,
-        title: 'Task 1',
-        content: 'Content 1',
-        status: 'pending'
+        title: 'Learn React',
+        content: 'Build projects in React.js and add them to github',
+        status: 'in progress'
     },
     {
         id: 2,
-        title: 'Task 2',
-        content: 'Content 2',
-        status: 'pending'
+        title: 'Learn Express',
+        content: 'Build Express API REST and use it in full-stack projects',
+        status: 'completed'
     },
     {
         id: 3,
-        title: 'Task 3',
-        content: 'Content 3',
+        title: 'Shopping list',
+        content: 'Eggs, Milk, Chocolate',
         status: 'pending'
     },
     {
         id: 4,
-        title: 'Task 4',
-        content: 'Content 4',
-        status: 'pending'
+        title: 'Look for a job',
+        content: 'Send this awesome app to recruiters and apply to the offers',
+        status: 'in progress'
     },
 ]
