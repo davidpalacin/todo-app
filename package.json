@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "deploy": "npm run build && gh-pages -d dist"
   },
+  "homepage": "https://davidpalacin.github.io/todo-app",
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
