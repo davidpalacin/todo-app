@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { type Task } from "../../types/types"
 import './taskCard.css'
 import { useDispatch } from 'react-redux'
-import { deleteOne, changeStatus } from "../../features/task/taskSlice"
+import { deleteOne, changeStatus, filterBy } from "../../features/task/taskSlice"
 
 
 export default function TaskCard({ task }: { task: Task }) {
@@ -13,6 +13,8 @@ export default function TaskCard({ task }: { task: Task }) {
     const [statusText, setStatusText] = useState('')
     const [btnText, setBtnText] = useState('')
     const [statusClass, setStatusClass] = useState('')
+    const thisFilter = localStorage.getItem('filter')
+    if (!thisFilter) return
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
@@ -43,6 +45,7 @@ export default function TaskCard({ task }: { task: Task }) {
 
     const handleChangeStatus = () => {
         dispatch(changeStatus({ id: task.id }))
+        dispatch(filterBy(thisFilter))
     }
 
     return (

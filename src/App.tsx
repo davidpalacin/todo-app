@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { useNavigate } from 'react-router'
 import TaskCard from './components/TaskCard/TaskCard'
@@ -11,13 +11,16 @@ function App() {
   const dispatch = useDispatch()
   const tasks = useSelector((state: RootState) => state.tasks.filteredTasks)
   const [filter, setFilter] = useState('all')
-  localStorage.setItem('filter', filter)
 
   const filterByStatus = (e: any) => {
     const selectedFilter = e.target.value;
     setFilter(selectedFilter);
     dispatch(filterBy(selectedFilter));
   }
+
+  useEffect(() => {
+    localStorage.setItem('filter', filter)
+  }, [filter])
 
   const openCreateTask = () => {
     navigate('/create')
