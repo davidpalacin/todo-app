@@ -41,6 +41,7 @@ export default function TaskCard({ task }: { task: Task }) {
 
     const deleteTask = () => {
         dispatch(deleteOne(task.id))
+        dispatch(filterBy(thisFilter))
     }
 
     const handleChangeStatus = () => {
