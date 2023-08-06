@@ -5,6 +5,8 @@ import './index.css'
 import CreateTask from './pages/CreateTask/CreateTask.tsx'
 import TaskDetail from './pages/TaskDetail/TaskDetail.tsx'
 import { createHashRouter, RouterProvider } from 'react-router-dom'
+import { store } from './store/store.ts'
+import { Provider } from 'react-redux'
 
 const router = createHashRouter([
   {
@@ -23,6 +25,8 @@ const router = createHashRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

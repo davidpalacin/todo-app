@@ -2,15 +2,16 @@ import { useNavigate } from "react-router"
 import { useState, useEffect } from 'react'
 import { type Task } from "../../types/types"
 import './taskCard.css'
-import { data } from "../../utils/data"
+import { useDispatch } from 'react-redux'
+import { deleteOne, changeStatus } from "../../features/task/taskSlice"
+
 
 export default function TaskCard({ task }: { task: Task }) {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [statusText, setStatusText] = useState('')
-    const [tasks, setTasks] = useState(data)
     const [btnText, setBtnText] = useState('')
-    const [status, setStatus] = useState(task.status)
     const [statusClass, setStatusClass] = useState('')
 
     const toggleMenu = () => {
@@ -18,45 +19,30 @@ export default function TaskCard({ task }: { task: Task }) {
     }
 
     useEffect(() => {
-        if (status === 'pending') {
+        if (task.status === 'pending') {
             setBtnText('Mark as in progress')
             setStatusText('Pending')
             setStatusClass('pendingText')
         }
-        if (status === 'in progress') {
+        if (task.status === 'in progress') {
             setBtnText('Mark as completed')
             setStatusText('In progress')
             setStatusClass('inProgressText')
         }
-        if (status === 'completed') {
+        if (task.status === 'completed') {
             setBtnText('Mark as pending')
             setStatusText('Completed')
             setStatusClass('completedText')
         }
-    }, [status])
+        setIsMenuOpen(false)
+    }, [task.status])
 
     const deleteTask = () => {
-        console.log(tasks)
-        const index = tasks.indexOf(task)
-        tasks.splice(index, 1)
-        setTasks(tasks)
-        navigate('/')
+        dispatch(deleteOne(task.id))
     }
 
     const handleChangeStatus = () => {
-        if (status === 'pending') {
-            setStatus('in progress');
-            task.status = 'in progress'
-        }
-        if (status === 'in progress') {
-            setStatus('completed');
-            task.status = 'completed'
-        }
-        if (status === 'completed') {
-            setStatus('pending');
-            task.status = 'pending'
-        }
-        setIsMenuOpen(false)
+        dispatch(changeStatus({ id: task.id }))
     }
 
     return (

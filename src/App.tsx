@@ -1,36 +1,27 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import { useNavigate } from 'react-router'
-import { data } from './utils/data'
 import TaskCard from './components/TaskCard/TaskCard'
+import { useSelector, useDispatch } from 'react-redux'
+import { filterBy } from './features/task/taskSlice'
+import { RootState } from './store/store'
 
 function App() {
-  const [tasks, setTasks] = useState(data)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const tasks = useSelector((state: RootState) => state.tasks.filteredTasks)
   const [filter, setFilter] = useState('all')
   localStorage.setItem('filter', filter)
 
   const filterByStatus = (e: any) => {
-    setFilter(e.target.value)
-    localStorage.setItem('filter', filter)
+    const selectedFilter = e.target.value;
+    setFilter(selectedFilter);
+    dispatch(filterBy(selectedFilter));
   }
 
   const openCreateTask = () => {
     navigate('/create')
   }
-
-  useEffect(() => {
-    if (filter === 'all') {
-      setTasks(data)
-    } else if (filter === 'in progress') {
-      setTasks(data.filter((task) => task.status === 'in progress'))
-    } else if (filter === 'completed') {
-      setTasks(data.filter((task) => task.status === 'completed'))
-    } else if (filter === 'pending') {
-      setTasks(data.filter((task) => task.status === 'pending'))
-    }
-  }, [filter])
-
 
   return (
     <div className="main">

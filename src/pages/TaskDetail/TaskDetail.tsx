@@ -1,19 +1,23 @@
 import { useParams, useNavigate } from "react-router"
-import { data } from "../../utils/data"
 import { useEffect, useState } from "react"
 import "./taskDetail.css"
+import { useSelector, useDispatch } from 'react-redux'
+import { deleteOne, changeStatus, editTask } from '../../features/task/taskSlice'
+import { RootState } from "../../store/store"
 
 export default function TaskDetail() {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [tasks, setTasks] = useState(data)
+  const tasks = useSelector((state: RootState) => state.tasks.tasks)
   const { id } = useParams()
+  if (!id) return
+  const taskId = parseInt(id);
   const [editMode, setEditMode] = useState(false)
-  const thisTask = tasks.find(task => task.id.toString() === id)
-  const [editTitle, setEditTitle] = useState(thisTask?.title)
-  const [editContent, setEditContent] = useState(thisTask?.content)
+  const thisTask = tasks.find(task => task.id === taskId)
+  if (!thisTask) return
+  const [editTitle, setEditTitle] = useState(thisTask.title)
+  const [editContent, setEditContent] = useState(thisTask.content)
   const [btnText, setBtnText] = useState('')
-  const [status, setStatus] = useState(thisTask?.status)
-
 
   useEffect(() => {
     // If the task is not found, navigate back to the base URL
@@ -23,17 +27,15 @@ export default function TaskDetail() {
   }, [thisTask, navigate]);
 
   useEffect(() => {
-    if (status === 'pending') { setBtnText('Mark as in progress') }
-    if (status === 'in progress') { setBtnText('Mark as completed') }
-    if (status === 'completed') { setBtnText('Mark as pending') }
-  }, [status])
+    if (thisTask?.status === 'pending') { setBtnText('Mark as in progress') }
+    if (thisTask?.status === 'in progress') { setBtnText('Mark as completed') }
+    if (thisTask?.status === 'completed') { setBtnText('Mark as pending') }
+  }, [thisTask?.status])
 
   if (!thisTask) return null
 
   const handleDeleteTask = () => {
-    const index = tasks.indexOf(thisTask)
-    tasks.splice(index, 1)
-    setTasks(tasks)
+    dispatch(deleteOne(taskId))
     navigate('/')
   }
 
@@ -42,24 +44,12 @@ export default function TaskDetail() {
   }
 
   const handleSaveChanges = () => {
-    if (editContent) thisTask.content = editContent
-    if (editTitle) thisTask.title = editTitle
+    dispatch(editTask({ id: taskId, newContent: editContent, newTitle: editTitle }))
     setEditMode(false)
   }
 
   const handleChangeStatus = () => {
-    if (status === 'pending') {
-      setStatus('in progress');
-      thisTask.status = 'in progress'
-    }
-    if (status === 'in progress') {
-      setStatus('completed');
-      thisTask.status = 'completed'
-    }
-    if (status === 'completed') {
-      setStatus('pending');
-      thisTask.status = 'pending'
-    }
+    dispatch(changeStatus({ id: thisTask.id }))
   }
 
   const checkEnterPress = (e: any) => {
