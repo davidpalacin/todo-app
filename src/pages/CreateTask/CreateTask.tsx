@@ -28,13 +28,13 @@ export default function CreateTask() {
     return (
         <div className="taskForm">
             <div className="taskFormTitle">
-                <h3>Choose a title for your note</h3>
-                <input onChange={handleTitle} type="text" />
+                <h3>Title</h3>
+                <input onChange={handleTitle} type="text" placeholder='Choose a title' />
             </div>
 
             <div className="taskFormContent">
-                <h3>Write your note</h3>
-                <textarea onChange={handleContent} />
+                <h3>Description</h3>
+                <textarea onChange={handleContent} placeholder='Explain the new task. Try to be clear for helping your team.' />
             </div>
 
             <button onClick={handleCreateTask} className="confirm">
